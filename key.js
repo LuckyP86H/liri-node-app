@@ -14,8 +14,7 @@ var spotify = new Spotify(keys.spotify);
 require('dotenv').config();
 //Global Variables 
 var keys = require('./keys');
-//Twitter Needs 
-var Twitter = require('twitter');
+
 var client = new Twitter(keys.twitter);
 //Spotify Needs
 var Spotify = require('node-spotify-api');
@@ -50,26 +49,7 @@ switch (command) {
         console.log(`I'm sorry, I don't understand.  \nYou can ask me my-tweets to read recent tweets. \nYou can ask me to spotify-this-song to find information about a song. \nYou can ask me to movie-this to find information about a movie.`)
 }
 
-function twitter() {
-    console.log(`--------------------`);
-    console.log('Here are your tweets:')
-    client.get('statuses/user_timeline', {
-        screen_name: 'dukethedog12',
-        count: 20
-    }, function (error, tweets, response) {
-        if (!error) {
-            for (i = 0; i < tweets.length; i++) {
-                console.log(`${[i + 1]}.  ${tweets[i].text}`);
-                console.log(`Published on: ${tweets[i].created_at}`);
-                console.log(`--------------------`);
-                var twitterData = `\nUsed tweet-me to find tweets: \n${tweets[i].text} \nTweeted at: ${tweets[i].created_at}\n--------------------`
-                fs.appendFile('log.txt', twitterData, function (err) {
-                    if (error) throw error;
-                });
-            }
-        }
-    });
-}
+
 
 function song() {
     var song = '';
@@ -109,7 +89,7 @@ function movie() {
         console.log(`--------------------`);
         console.log(`Here's what I found about the movie!`);
     }
-    request("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece", function (error, response, body) {
+    request("http://www.api.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece", function (error, response, body) {
         if (!error && response.statusCode === 200) {
             console.log(`Movie Title: ${JSON.parse(body).Title}`);
             console.log(`Release Year: ${JSON.parse(body).Year}`);
@@ -152,7 +132,7 @@ function followDirections() {
             var dataArray = data.split(',');
             var dataCommand = dataArray[0];
             var dataInput = dataArray[1];
-            console.log(`Hmm...give me a minute while I read the file!`)
+            console.log('Loading...')
             switch (dataCommand) {
                 case 'my-tweets':
                     twitter();
@@ -166,7 +146,7 @@ function followDirections() {
                     movie();
                     break;
                 default:
-                    console.log(`Something went wrong!`)
+                    console.log('error')
             }
         }
     })
