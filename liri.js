@@ -95,7 +95,7 @@ function movieIt (movieQuery) {
         }
 
     // Then run a request to the OMDB API with the movie specified
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieQuery + "&y=&plot=short&apikey=trilogy";
+    var queryUrl = "http://www.omdbapi.com/?i=tt3896198&apikey=5a63c315";
 
     // This line is just to help us debug against the actual URL.
     console.log(queryUrl);
