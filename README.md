@@ -49,3 +49,5 @@ A random.txt file with search for spotify-this-song "I want it that way." This w
 * Bands in Town API
 * OMDB API
 
+________________
+<sub> &copy; Paul Xu at Univerversity of Toronto School of Continuing Studies Coding Boot Camp in March 2019 </sub>
